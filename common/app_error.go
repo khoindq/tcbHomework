@@ -2,7 +2,9 @@ package common
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
+	"strings"
 )
 
 type AppError struct {
@@ -56,4 +58,32 @@ func (e *AppError) Error() string {
 func ErrInternal(err error) *AppError {
 	return NewFullErrorResponse(http.StatusInternalServerError, err,
 		"something went wrong in the server", err.Error(), "ErrInternal")
+}
+
+func ErrInvalidRequest(err error) *AppError {
+	return NewErrorResponse(err, "invalid request", err.Error(), "ErrInvalidRequest")
+}
+
+func ErrCannotCreateEntity(entity string, err error) *AppError {
+	return NewCustomError(
+		err,
+		fmt.Sprintf("Cannot Create %s", strings.ToLower(entity)),
+		fmt.Sprintf("ErrCannotCreate%s", entity),
+	)
+}
+
+func ErrCannotUpdateEntity(entity string, err error) *AppError {
+	return NewCustomError(
+		err,
+		fmt.Sprintf("Cannot update %s", strings.ToLower(entity)),
+		fmt.Sprintf("ErrCannotUpdate%s", entity),
+	)
+}
+
+func ErrCannotGetEntity(entity string, err error) *AppError {
+	return NewCustomError(
+		err,
+		fmt.Sprintf("Cannot get %s", strings.ToLower(entity)),
+		fmt.Sprintf("ErrCannotGet%s", entity),
+	)
 }
