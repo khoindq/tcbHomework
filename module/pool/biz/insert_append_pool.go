@@ -18,14 +18,19 @@ type insertAppendBiz struct {
 }
 
 func NewInsertAppendPoolBiz(poolStore PoolStore) *insertAppendBiz {
+	// NewInsertAppendPoolBiz is a constructor function for the insertAppendBiz type.
+	// It creates and returns a new instance of insertAppendBiz with the provided poolStore.
 	return &insertAppendBiz{poolStore: poolStore}
 }
 
 func (biz *insertAppendBiz) InsertAppendPool(ctx context.Context, data *poolmodel.Pool) (*poolmodel.PoolStatus, error) {
-	//find the pool with the id first
+	// InsertAppendPool is a method of the insertAppendBiz type.
+	// It inserts or appends a pool based on the given data.
+
+	// First, check if the pool with the specified ID exists in the poolStore.
 	_, found := biz.poolStore.FindPool(ctx, data.PoolID)
 
-	//not found case, we will insert to the pooll
+	// If the pool is not found, insert the pool.
 	if !found {
 		poolInsertData := poolmodel.PoolInsert{
 			Pool: *data,
@@ -35,10 +40,10 @@ func (biz *insertAppendBiz) InsertAppendPool(ctx context.Context, data *poolmode
 		}
 
 		if err := biz.poolStore.InsertPool(ctx, &poolInsertData); err != nil {
-			return nil, common.ErrCannotCreateEntity(poolmodel.EntityName, err)
+			return nil, err
 		}
 		return poolmodel.PoolStatusInserted.ToPointer(), nil
-	} else { // found case, we will append
+	} else { // If the pool is found, append the pool
 		poolAppendData := poolmodel.PoolAppend{
 			Pool: *data,
 		}
