@@ -52,3 +52,16 @@ api-doc: ## - Generate docs
 poolservice-run: ## - Run pool service 
 	@echo "${TARGET_COLOR} Running poolservice... !${RESET}"
 	go run cmd/poolservice/main.go
+
+# Gen mock interface
+gen-mock: ## Generate mock interface
+	find . -name 'mock_*' -delete
+	go install github.com/vektra/mockery/v2/.../ && \
+	mockery --all --case underscore --inpackage
+
+# Tesing
+test:  ## run test, and get coverage
+	go test -cover ./...
+
+
+

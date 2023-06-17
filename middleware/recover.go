@@ -26,6 +26,7 @@ func Recover() gin.HandlerFunc {
 
 				// If the panic value is not an *common.AppError, create an internal server error AppError.
 				appErr := common.ErrInternal(err.(error))
+
 				// Abort the request and respond with the internal server error as JSON.
 				c.AbortWithStatusJSON(appErr.StatusCode, appErr)
 				// In case you want to analyze the error with the Gin framework, you can uncomment the line below.

@@ -36,11 +36,11 @@ func (biz *insertAppendBiz) InsertAppendPool(ctx context.Context, data *poolmode
 			Pool: *data,
 		}
 		if err := poolInsertData.Validate(); err != nil {
-			return nil, err
+			return nil, common.ErrValidateFailed(err)
 		}
 
 		if err := biz.poolStore.InsertPool(ctx, &poolInsertData); err != nil {
-			return nil, err
+			return nil, common.ErrCannotCreateEntity(poolmodel.EntityName, err)
 		}
 		return poolmodel.PoolStatusInserted.ToPointer(), nil
 	} else { // If the pool is found, append the pool
@@ -48,7 +48,7 @@ func (biz *insertAppendBiz) InsertAppendPool(ctx context.Context, data *poolmode
 			Pool: *data,
 		}
 		if err := poolAppendData.Validate(); err != nil {
-			return nil, err
+			return nil, common.ErrValidateFailed(err)
 		}
 
 		if err := biz.poolStore.AppendPool(ctx, &poolAppendData); err != nil {

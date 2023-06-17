@@ -24,7 +24,7 @@ func (biz *getQuantileBiz) GetQuantile(ctx context.Context, req *poolmodel.PoolQ
 
 	// First, validate the request object.
 	if err := req.Validate(); err != nil {
-		return nil, err
+		return nil, common.ErrValidateFailed(err)
 	}
 
 	// Find the pool with the specified ID using the poolStore.

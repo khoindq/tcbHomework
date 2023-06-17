@@ -6,7 +6,7 @@ definitions:
       filter:
         description: for future  using
       paging:
-        description: for future  using
+        description: for future using
     type: object
   poolmodel.Pool:
     properties:

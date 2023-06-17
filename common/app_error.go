@@ -94,3 +94,11 @@ func ErrEntityNotFound(entity string, err error) *AppError {
 		fmt.Sprintf("Err%sNotFound", entity),
 	)
 }
+
+func ErrValidateFailed(err error) *AppError {
+	return NewCustomError(
+		err,
+		"Validate request failed",
+		"ErrValidateFailed",
+	)
+}

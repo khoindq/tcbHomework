@@ -2,8 +2,6 @@ package poolmodel
 
 import (
 	"errors"
-
-	"github.com/khoindq/tcbHomework/common"
 )
 
 const EntityName = "Pool"
@@ -24,7 +22,7 @@ type PoolInsert struct {
 // Validate validates the PoolInsert struct.
 func (pool *PoolInsert) Validate() error {
 	if len(pool.PoolValues) == 0 {
-		return ErrPoolCreateValidateFailed(errors.New("pool.poolValues is empty"))
+		return errors.New("pool.poolValues is empty")
 	}
 	return nil
 }
@@ -55,7 +53,7 @@ type PoolQuantileResp struct {
 // Validate validates the PoolQuantileGet struct.
 func (pool *PoolQuantileGet) Validate() error {
 	if pool.Percentile < 0 || pool.Percentile > 100 {
-		return ErrPoolPercentileGetValidateFailed(errors.New("pool.Percentile must be between 0 and 100"))
+		return errors.New("pool.Percentile must be between 0 and 100")
 	}
 	return nil
 }
@@ -70,31 +68,4 @@ const PoolStatusAppended = PoolStatus("appended")
 // ToPointer converts a PoolStatus value to a pointer.
 func (p PoolStatus) ToPointer() *PoolStatus {
 	return &p
-}
-
-// ErrPoolPercentileGetValidateFailed creates a custom error for failed percentile validation.
-func ErrPoolPercentileGetValidateFailed(err error) *common.AppError {
-	return common.NewCustomError(
-		err,
-		"Cannot validate PoolPercentileGet",
-		"ErrPoolPercentileGetValidateFailed",
-	)
-}
-
-// ErrPoolCreateValidateFailed creates a custom error for failed pool creation validation.
-func ErrPoolCreateValidateFailed(err error) *common.AppError {
-	return common.NewCustomError(
-		err,
-		"Cannot validate PoolCreate",
-		"ErrPoolCreatelidateFailed",
-	)
-}
-
-// ErrPoolNotFound creates a custom error for a pool not found.
-func ErrPoolNotFound(err error) *common.AppError {
-	return common.NewCustomError(
-		err,
-		"Pool Not Found",
-		"ErrPoolNotFound",
-	)
 }
