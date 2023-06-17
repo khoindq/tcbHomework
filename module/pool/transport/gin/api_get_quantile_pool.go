@@ -12,36 +12,33 @@ import (
 
 // @BasePath /api/v1
 
-// InsertorAppendPool godoc
-// @Summary Insert or append a pool
+// GetQuantile godoc
+// @Summary GetQuantile of a pool
 // @Schemes
-// @Description Inserts or appends a pool to the database
+// @Description GetQuantile of a pool
 // @Tags Pool
 // @Accept json
 // @Produce json
-// @Param data body poolmodel.Pool true "Pool object"
+// @Param data body poolmodel.PoolQuantileGet true "PoolQuantileGet object"
 // @Success 200 {object} common.successRes
-// @Router /pool/insertorappend [post]
-func (c *PoolController) InsertOrAppendPoolHandler() gin.HandlerFunc {
+// @Router /pool/quantile/get [post]
+func (c *PoolController) GetQuantileHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var req poolmodel.Pool
+		var req poolmodel.PoolQuantileGet
 		if err := c.ShouldBind(&req); err != nil {
 			c.JSON(http.StatusBadRequest, common.ErrInvalidRequest(err))
 			return
 		}
-
 		poolStore := poolstorage.NewStore()
 
-		biz := poolbiz.NewInsertAppendPoolBiz(poolStore)
+		biz := poolbiz.NewGetQuantileBiz(poolStore)
 
-		status, err := biz.InsertAppendPool(c.Request.Context(), &req)
+		resp, err := biz.GetQuantile(c.Request.Context(), &req)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, err)
 			return
 		}
 
-		c.JSON(http.StatusOK, common.NewSuccessResponse(map[string]interface{}{
-			"status": status,
-		}, nil, nil))
+		c.JSON(http.StatusOK, common.NewSuccessResponse(resp, nil, nil))
 	}
 }

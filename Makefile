@@ -46,10 +46,9 @@ __check_defined = \
 # Docs
 api-doc: ## - Generate docs
 	@echo "${TARGET_COLOR} Generating api docs... !${RESET}"
-	swag init -g ./cmd/poolservice/main.go -o ./docs/poolservice 
+	swag init  -g ./cmd/poolservice/main.go -o ./docs/poolservice 
 
 # Run
 poolservice-run: ## - Run pool service 
 	@echo "${TARGET_COLOR} Running poolservice... !${RESET}"
 	go run cmd/poolservice/main.go
-

@@ -1,20 +1,83 @@
 basePath: /api/v1
+definitions:
+  common.successRes:
+    properties:
+      data: {}
+      filter:
+        description: for future  using
+      paging:
+        description: for future  using
+    type: object
+  poolmodel.Pool:
+    properties:
+      poolId:
+        type: integer
+      poolValues:
+        items:
+          type: number
+        type: array
+    required:
+    - poolId
+    - poolValues
+    type: object
+  poolmodel.PoolQuantileGet:
+    properties:
+      percentile:
+        type: number
+      poolId:
+        type: integer
+    type: object
+host: localhost:8080
 info:
-  contact: {}
+  contact:
+    email: khoindq@gmail.com
+    name: Khoi Nguyen
+  description: A tcp homework backend server
+  title: Pool service
+  version: 1.0 d
 paths:
-  /example/helloworld:
-    get:
+  /pool/insertorappend:
+    post:
       consumes:
       - application/json
-      description: do ping
+      description: Inserts or appends a pool to the database
+      parameters:
+      - description: Pool object
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/poolmodel.Pool'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            type: string
-      summary: ping example
+            $ref: '#/definitions/common.successRes'
+      summary: Insert or append a pool
       tags:
-      - example
+      - Pool
+  /pool/quantile/get:
+    post:
+      consumes:
+      - application/json
+      description: GetQuantile of a pool
+      parameters:
+      - description: PoolQuantileGet object
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/poolmodel.PoolQuantileGet'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/common.successRes'
+      summary: GetQuantile of a pool
+      tags:
+      - Pool
 swagger: "2.0"

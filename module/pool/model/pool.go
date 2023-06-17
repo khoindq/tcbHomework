@@ -10,6 +10,7 @@ const EntityName = "Pool"
 
 var FakePoolDB map[int64]Pool
 
+// Pool object
 type Pool struct {
 	PoolID     int64     `json:"poolId" binding:"required"`
 	PoolValues []float64 `json:"poolValues" binding:"required"`
@@ -35,12 +36,17 @@ func (pool *PoolAppend) Validate() error {
 	return nil
 }
 
-type PoolPercentileGet struct {
-	Pool       int64   `json:"poolId"`
-	Percentile float64 `json:"percentile"`
+// PoolQuantileGet object
+type PoolQuantileGet struct {
+	PoolID     int64   `json:"poolId" binding:"required"`
+	Percentile float64 `json:"percentile" binding:"required"`
+}
+type PoolQuantileResp struct {
+	TotalCount         int64   `json:"totalCount"`
+	CalculatedQuantile float64 `json:"calculatedQuantile"`
 }
 
-func (pool *PoolPercentileGet) Validate() error {
+func (pool *PoolQuantileGet) Validate() error {
 	if pool.Percentile < 0 || pool.Percentile > 100 {
 		return ErrPoolPercentileGetValidateFailed(errors.New("pool.Percentile must be between 0 and 100"))
 	}

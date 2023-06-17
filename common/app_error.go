@@ -87,3 +87,10 @@ func ErrCannotGetEntity(entity string, err error) *AppError {
 		fmt.Sprintf("ErrCannotGet%s", entity),
 	)
 }
+func ErrEntityNotFound(entity string, err error) *AppError {
+	return NewCustomError(
+		err,
+		fmt.Sprintf("%s not found", strings.ToLower(entity)),
+		fmt.Sprintf("Err%sNotFound", entity),
+	)
+}
