@@ -4,8 +4,11 @@ import (
 	"testing"
 )
 
-// test case are  compared with np percentile python
+// test case are compared (rechecked with) with np percentile python
 func TestGetQuantileNearestRangeDataOnly(t *testing.T) {
+	// TestGetQuantileNearestRangeDataOnly is a test function for GetQuantileInNearestRanks.
+	// It tests the calculation of quantile values based on nearest ranks.
+
 	testCases := []struct {
 		data             []float64
 		reqPercentile    float64
@@ -49,13 +52,16 @@ func TestGetQuantileNearestRangeDataOnly(t *testing.T) {
 		},
 	}
 
+	// Iterate over each test case and perform the test
 	for i, testCase := range testCases {
 		calculatedQuantile, err := GetQuantileInNearestRanks(testCase.reqPercentile, testCase.data)
 
+		// Check if there's an error in the calculation
 		if err != nil {
 			t.Errorf("Test case %d: Expected no error, got: %v", i+1, err)
 		}
 
+		// Compare the calculated quantile with the expected quantile
 		if *calculatedQuantile != testCase.expectedQuantile {
 			t.Errorf("Test case %d: Expected quantile %f, got %f", i+1, testCase.expectedQuantile, *calculatedQuantile)
 		}
@@ -63,6 +69,8 @@ func TestGetQuantileNearestRangeDataOnly(t *testing.T) {
 }
 
 func TestGetQuantileInPercentileSpecialCase(t *testing.T) {
+	// TestGetQuantileInPercentileSpecialCase is a test function for GetQuantileInNearestRanks.
+	// It tests special cases where the request percentile is invalid or the data length is invalid.
 
 	// Testing invalid request percentile
 	reqPercentile := -10.0
