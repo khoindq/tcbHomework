@@ -109,9 +109,11 @@ const docTemplate = `{
             ],
             "properties": {
                 "poolId": {
+                    "description": "ID of the pool",
                     "type": "integer"
                 },
                 "poolValues": {
+                    "description": "ID of the pool",
                     "type": "array",
                     "items": {
                         "type": "number"
@@ -121,11 +123,17 @@ const docTemplate = `{
         },
         "poolmodel.PoolQuantileGet": {
             "type": "object",
+            "required": [
+                "percentile",
+                "poolId"
+            ],
             "properties": {
                 "percentile": {
+                    "description": "Desired percentile",
                     "type": "number"
                 },
                 "poolId": {
+                    "description": "ID of the pool",
                     "type": "integer"
                 }
             }

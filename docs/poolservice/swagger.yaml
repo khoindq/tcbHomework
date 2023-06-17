@@ -6,13 +6,15 @@ definitions:
       filter:
         description: for future  using
       paging:
-        description: for future using
+        description: for future  using
     type: object
   poolmodel.Pool:
     properties:
       poolId:
+        description: ID of the pool
         type: integer
       poolValues:
+        description: ID of the pool
         items:
           type: number
         type: array
@@ -23,9 +25,14 @@ definitions:
   poolmodel.PoolQuantileGet:
     properties:
       percentile:
+        description: Desired percentile
         type: number
       poolId:
+        description: ID of the pool
         type: integer
+    required:
+    - percentile
+    - poolId
     type: object
 host: localhost:8080
 info:
