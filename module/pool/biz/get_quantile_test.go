@@ -4,6 +4,7 @@ import (
 	"context"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/aws"
 	poolmodel "github.com/khoindq/tcbHomework/module/pool/model"
 	"github.com/stretchr/testify/assert"
 )
@@ -22,7 +23,7 @@ func TestGetQuantile(t *testing.T) {
 	t.Run("Returns quantile value when pool and request are valid", func(t *testing.T) {
 		// Set up test data
 		req := &poolmodel.PoolQuantileGet{
-			PoolID:     1,
+			PoolID:     aws.Int64(1),
 			Percentile: 50,
 		}
 		poolValues := []float64{1.0, 2.0, 3.0, 4.0, 5.0}
@@ -53,7 +54,7 @@ func TestGetQuantile(t *testing.T) {
 	t.Run("Returns an error when request validation fails", func(t *testing.T) {
 		// Set up test data
 		req := &poolmodel.PoolQuantileGet{
-			PoolID:     1,
+			PoolID:     aws.Int64(1),
 			Percentile: 150, // Invalid percentile value
 		}
 
@@ -68,7 +69,7 @@ func TestGetQuantile(t *testing.T) {
 	t.Run("Returns an error when pool is not found", func(t *testing.T) {
 		// Set up test data
 		req := &poolmodel.PoolQuantileGet{
-			PoolID:     6,
+			PoolID:     aws.Int64(6),
 			Percentile: 0.7,
 		}
 

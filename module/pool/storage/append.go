@@ -16,7 +16,7 @@ func (s *Store) AppendPool(ctx context.Context, data *poolmodel.PoolAppend) erro
 	defer common.FakeDB.Unlock()
 
 	// Append the pool values to the existing pool in FakeDB.
-	common.FakeDB.Pools[data.PoolID] = append(common.FakeDB.Pools[data.PoolID], data.PoolValues...)
+	common.FakeDB.Pools[*data.PoolID] = append(common.FakeDB.Pools[*data.PoolID], data.PoolValues...)
 
 	return nil
 }

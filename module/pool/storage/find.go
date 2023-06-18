@@ -7,7 +7,7 @@ import (
 	poolmodel "github.com/khoindq/tcbHomework/module/pool/model"
 )
 
-func (s *Store) FindPool(ctx context.Context, id int64) (result *poolmodel.Pool, found bool) {
+func (s *Store) FindPool(ctx context.Context, id *int64) (result *poolmodel.Pool, found bool) {
 	// FindPool is a method of the Store type.
 	// It searches for a pool with the specified ID in the store.
 
@@ -16,7 +16,7 @@ func (s *Store) FindPool(ctx context.Context, id int64) (result *poolmodel.Pool,
 	defer common.FakeDB.RUnlock()
 
 	// Retrieve the pool values associated with the given ID from FakeDB.
-	value, ok := common.FakeDB.Pools[id]
+	value, ok := common.FakeDB.Pools[*id]
 
 	// If the pool is not found, return nil and false.
 	if !ok {

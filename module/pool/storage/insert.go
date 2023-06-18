@@ -16,7 +16,7 @@ func (s *Store) InsertPool(ctx context.Context, data *poolmodel.PoolInsert) erro
 	defer common.FakeDB.Unlock()
 
 	// Assign the pool values to the specified pool ID in FakeDB.
-	common.FakeDB.Pools[data.PoolID] = data.PoolValues
+	common.FakeDB.Pools[*data.PoolID] = data.PoolValues
 
 	return nil
 }

@@ -29,11 +29,11 @@ func (_m *MockPoolStore) AppendPool(ctx context.Context, data *poolmodel.PoolApp
 }
 
 // FindPool provides a mock function with given fields: ctx, id
-func (_m *MockPoolStore) FindPool(ctx context.Context, id int64) (*poolmodel.Pool, bool) {
+func (_m *MockPoolStore) FindPool(ctx context.Context, id *int64) (*poolmodel.Pool, bool) {
 	ret := _m.Called(ctx, id)
 
 	var r0 *poolmodel.Pool
-	if rf, ok := ret.Get(0).(func(context.Context, int64) *poolmodel.Pool); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *int64) *poolmodel.Pool); ok {
 		r0 = rf(ctx, id)
 	} else {
 		if ret.Get(0) != nil {
@@ -42,7 +42,7 @@ func (_m *MockPoolStore) FindPool(ctx context.Context, id int64) (*poolmodel.Poo
 	}
 
 	var r1 bool
-	if rf, ok := ret.Get(1).(func(context.Context, int64) bool); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *int64) bool); ok {
 		r1 = rf(ctx, id)
 	} else {
 		r1 = ret.Get(1).(bool)

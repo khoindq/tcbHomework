@@ -10,7 +10,7 @@ import (
 type PoolStore interface {
 	InsertPool(ctx context.Context, data *poolmodel.PoolInsert) error
 	AppendPool(ctx context.Context, data *poolmodel.PoolAppend) error
-	FindPool(ctx context.Context, id int64) (result *poolmodel.Pool, found bool)
+	FindPool(ctx context.Context, id *int64) (result *poolmodel.Pool, found bool)
 }
 
 type insertAppendBiz struct {

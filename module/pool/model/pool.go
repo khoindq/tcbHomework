@@ -10,7 +10,7 @@ var FakePoolDB map[int64]Pool
 
 // Pool represents a pool with an ID and a collection of values.
 type Pool struct {
-	PoolID     int64     `json:"poolId" binding:"required"`     // ID of the pool
+	PoolID     *int64    `json:"poolId" binding:"required"`     // ID of the pool
 	PoolValues []float64 `json:"poolValues" binding:"required"` // ID of the pool
 }
 
@@ -40,7 +40,7 @@ func (pool *PoolAppend) Validate() error {
 
 // PoolQuantileGet represents a request to get the quantile of a pool.
 type PoolQuantileGet struct {
-	PoolID     int64   `json:"poolId" binding:"required"`     // ID of the pool
+	PoolID     *int64  `json:"poolId" binding:"required"`     // ID of the pool
 	Percentile float64 `json:"percentile" binding:"required"` // Desired percentile
 }
 

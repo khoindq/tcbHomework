@@ -4,6 +4,7 @@ import (
 	"context"
 	"testing"
 
+	"github.com/aws/aws-sdk-go/aws"
 	poolmodel "github.com/khoindq/tcbHomework/module/pool/model"
 	"github.com/stretchr/testify/assert"
 	mock "github.com/stretchr/testify/mock"
@@ -14,7 +15,7 @@ func TestInsertAppendPool_Insert(t *testing.T) {
 	poolBiz := NewInsertAppendPoolBiz(poolStore)
 
 	pool := &poolmodel.Pool{
-		PoolID:     1,
+		PoolID:     aws.Int64(1),
 		PoolValues: []float64{1, 2, 3},
 
 		// Set other pool fields as needed
@@ -35,13 +36,13 @@ func TestInsertAppendPool_Append(t *testing.T) {
 	poolBiz := NewInsertAppendPoolBiz(poolStore)
 
 	pool := &poolmodel.Pool{
-		PoolID:     1,
+		PoolID:     aws.Int64(1),
 		PoolValues: []float64{1, 2, 3},
 		// Set other pool fields as needed
 	}
 
 	existingPool := &poolmodel.Pool{
-		PoolID: 1,
+		PoolID: aws.Int64(1),
 		// Set other existing pool fields as needed
 	}
 
