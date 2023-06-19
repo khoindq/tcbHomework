@@ -56,7 +56,7 @@ The `Makefile` contains the following commands:
 - `make help`: Show the help message.
 - `make poolservice run`: Run the command 
 - `make api-doc`: Required (`swag` - [https://github.com/swaggo/swag](https://github.com/swaggo/swag) is installed). This command generates documentation, which is stored in `docs/poolservice`.
-- `make gen-mock`: Generate mocking interface of any interface definition in the project (requires [dependency]).
+- `make gen-mock`: Generate mocking interface of any interface definition in the project (requires mockery v2 https://github.com/vektra/mockery).
 - `make test`: Test the program.
 ### Run the project
 1. Execute the following command: `make poolservice-run`
