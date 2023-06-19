@@ -25,11 +25,8 @@ The swagger document is implemented together with the project. You can access th
 
 The typical success response of the API is embedded inside a common structured defined in the file `common/app_response`. It includes the data filled with child object structures.
 
-The typical error response of the API is embedded inside a common structured defined in the file common/error . it contains the root cause error , http error status code and log message. When in real enviroment this error can be filtered (only allow specific field of error data is exported based on deploy enviroment) but the implementation is not completed due to the limit time of this homework 
-The Makefile contains command 
-Makehelo --> show the help message
-make api-doc --> required (swag - https://github.com/swaggo/swag in installed ) this command generated documentation which is stored in docs/poolservice 
-make gen-mock --> generate mocking interface of any interface defination in the priject (require )
+The typical error response of the API is embedded inside a common structured defined in the file `common/error`. It contains the root cause error, HTTP error status code, and log message. In a real environment, this error can be filtered to only allow specific fields of error data to be exported based on the deployed environment. However, the implementation of this feature is not completed due to the time limit of this homework.
+
 
 ## Project Structure
 
@@ -52,8 +49,18 @@ make gen-mock --> generate mocking interface of any interface defination in the 
 - mockery (optional - if you want to generate mock interface): [https://github.com/vektra/mockery](https://github.com/vektra/mockery)
 - swag (optional - if you want to generate swag documentation): [https://github.com/swaggo/gin-swagger](https://github.com/swaggo/gin-swagger)
 
+### The make file commands
+
+The `Makefile` contains the following commands:
+
+- `make help`: Show the help message.
+- `make poolservice run`: Run the command 
+- `make api-doc`: Required (`swag` - [https://github.com/swaggo/swag](https://github.com/swaggo/swag) is installed). This command generates documentation, which is stored in `docs/poolservice`.
+- `make gen-mock`: Generate mocking interface of any interface definition in the project (requires [dependency]).
+- `make test`: Test the program.
 ### Run the project
 1. Execute the following command: `make poolservice-run`
+
 
 ### Test the project with curl command:
 1. Insert or append the pool
