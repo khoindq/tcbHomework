@@ -40,8 +40,8 @@ func (pool *PoolAppend) Validate() error {
 
 // PoolQuantileGet represents a request to get the quantile of a pool.
 type PoolQuantileGet struct {
-	PoolID     *int64  `json:"poolId" binding:"required"`     // ID of the pool
-	Percentile float64 `json:"percentile" binding:"required"` // Desired percentile
+	PoolID     *int64   `json:"poolId" binding:"required"`     // ID of the pool
+	Percentile *float64 `json:"percentile" binding:"required"` // Desired percentile
 }
 
 // PoolQuantileResp represents the response containing the quantile information.
@@ -52,7 +52,7 @@ type PoolQuantileResp struct {
 
 // Validate validates the PoolQuantileGet struct.
 func (pool *PoolQuantileGet) Validate() error {
-	if pool.Percentile < 0 || pool.Percentile > 100 {
+	if *pool.Percentile < 0 || *pool.Percentile > 100 {
 		return errors.New("pool.Percentile must be between 0 and 100")
 	}
 	return nil

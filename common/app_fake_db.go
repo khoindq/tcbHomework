@@ -7,6 +7,10 @@ type DB struct {
 	Pools map[int64][]float64
 }
 
+func (db *DB) Clean() {
+	db.Pools = make(map[int64][]float64)
+}
+
 var FakeDB = DB{
 	Pools: make(map[int64][]float64),
 }

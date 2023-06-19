@@ -35,7 +35,7 @@ func (biz *getQuantileBiz) GetQuantile(ctx context.Context, req *poolmodel.PoolQ
 	}
 
 	// Calculate the quantile value using the utils.GetQuantileInNearestRanks function.
-	calculatedQuantile, err := utils.GetQuantileInNearestRanks(req.Percentile, foundPool.PoolValues)
+	calculatedQuantile, err := utils.GetQuantileInNearestRanks(*req.Percentile, foundPool.PoolValues)
 	if err != nil {
 		return nil, err
 	}

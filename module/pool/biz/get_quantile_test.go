@@ -24,7 +24,7 @@ func TestGetQuantile(t *testing.T) {
 		// Set up test data
 		req := &poolmodel.PoolQuantileGet{
 			PoolID:     aws.Int64(1),
-			Percentile: 50,
+			Percentile: aws.Float64(50),
 		}
 		poolValues := []float64{1.0, 2.0, 3.0, 4.0, 5.0}
 
@@ -55,7 +55,7 @@ func TestGetQuantile(t *testing.T) {
 		// Set up test data
 		req := &poolmodel.PoolQuantileGet{
 			PoolID:     aws.Int64(1),
-			Percentile: 150, // Invalid percentile value
+			Percentile: aws.Float64(150), // Invalid percentile value
 		}
 
 		// Call the method
@@ -70,7 +70,7 @@ func TestGetQuantile(t *testing.T) {
 		// Set up test data
 		req := &poolmodel.PoolQuantileGet{
 			PoolID:     aws.Int64(6),
-			Percentile: 0.7,
+			Percentile: aws.Float64(0.7),
 		}
 
 		// Mock the FindPool method to return pool not found
