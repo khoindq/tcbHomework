@@ -57,9 +57,9 @@ func TestAPIQuantileSuccess(t *testing.T) {
 		}
 	}
 
-	// Send the insert or append getquery
+	// Send the get query
 	for i := 0; i <= 1000; i++ {
-		// Create an insert or append to the pool
+		// Create an resquest data object
 		poolGet := poolmodel.PoolQuantileGet{
 			PoolID:     aws.Int64(int64(i)),
 			Percentile: aws.Float64(50),
@@ -88,7 +88,7 @@ func TestAPIQuantileSuccess(t *testing.T) {
 			t.Errorf("Request %d failed with status code %d", i+1, res.Code)
 		}
 
-		// Test the get quantile result
+		// Test the get quantile and total count result
 		var response struct {
 			Data poolmodel.PoolQuantileResp `json:"data"`
 		}
